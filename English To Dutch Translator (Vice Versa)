@@ -1,0 +1,35 @@
+from translate import Translator
+
+def chatbot():
+    print("Welcome to the Dutch Learning Chatbot!")
+    print("Type 'exit' to end the conversation.\n")
+    print("Type 'en-nl' to translate from English to Dutch.")
+    print("Type 'nl-en' to translate from Dutch to English.\n")
+
+    while True:
+        direction = input("Choose translation direction (en-nl/nl-en): ").strip().lower()
+        
+        if direction == 'exit':
+            print("Chatbot: Tot ziens! (Goodbye!)")
+            break
+        elif direction not in ['en-nl', 'nl-en']:
+            print("Invalid direction. Please choose 'en-nl' or 'nl-en'.")
+            continue
+
+        if direction == 'en-nl':
+            translator = Translator(to_lang="nl")
+        elif direction == 'nl-en':
+            translator = Translator(to_lang="en", from_lang="nl")
+
+        while True:
+            user_input = input("You: ").strip()
+
+            if user_input.lower() == 'exit':
+                print("Chatbot: Tot ziens! (Goodbye!)")
+                return
+
+            translation = translator.translate(user_input)
+            print(f"Chatbot: {translation} (Translation)")
+
+if __name__ == "__main__":
+    chatbot()
